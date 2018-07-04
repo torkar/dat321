@@ -22,13 +22,12 @@ RUN mkdir -p $HOME/.R/ \
 
 RUN install2.r --error rstan
 
-#RUN install2.r --error mvtnorm
+RUN install2.r --error mvtnorm
 
-#RUN install2.r --error loo
+RUN install2.r --error loo
 
-#RUN install2.r --error coda
+RUN install2.r --error coda
 
-#options(repos=c(getOption('repos'), rethinking='http://xcelab.net/R'))
-#install.packages('rethinking', type='source')
+RUN install2.r -r http://xcelab.net/R --error rethinking
 
 RUN rm -rf /tmp/downloaded_packages/ /tmp/*.rds
