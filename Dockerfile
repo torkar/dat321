@@ -4,19 +4,16 @@ LABEL maintainer="richard.torkar@gmail.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-#COPY pt_1.1.tar.gz /home/rstudio/
-
-COPY data.csv /home/rstudio/
-
-#COPY brms.R /home/rstudio/
+COPY new_data.csv /home/rstudio/
 
 RUN apt-get update -qq \ 
   && apt-get -y install build-essential ed pkg-config apt-utils libglu1-mesa-dev libnlopt-dev nano libgsl-dev libz-dev
 
 RUN mkdir -p $HOME/.R/ \ 
-  && echo "CXXFLAGS=-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function -Wno-macro-redefined" >> $HOME/.R/Makevars \
-  && echo "CXXFLAGS+=-flto -Wno-unused-local-typedefs" >> $HOME/.R/Makevars \
-  && echo "CXXFLAGS += -Wno-ignored-attributes -Wno-deprecated-declarations" >> $HOME/.R/Makevars \
+  && echo "CXX14FLAGS=-O3 -march=native -mtune=native -fPIC" >> $HOME/.R/Makevars \
+  && echo "CXX14=g++ -std=c++11" >> $HOME/.R/Makevars \
+  && echo "CXX14FLAGS+= -std=c++11" >> $HOME/.R/Makevars \
+  && echo "CXX14STD='-std=c++11'" >> $HOME/.R/Makevars \
   && echo "rstan::rstan_options(auto_write = TRUE)" >> /home/rstudio/.Rprofile \
   && echo "options(mc.cores = parallel::detectCores())" >> /home/rstudio/.Rprofile
 
