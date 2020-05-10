@@ -25,6 +25,10 @@ RUN install2.r --error loo
 
 RUN install2.r --error coda
 
+RUN install2.r --error dagitty
+
+RUN install2.r --error shape
+
 RUN install2.r -r http://xcelab.net/R --error rethinking
 
 RUN rm -rf /tmp/downloaded_packages/ /tmp/*.rds
