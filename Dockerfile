@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 COPY new_data.csv /home/rstudio/
 
 RUN apt-get update -qq \ 
-  && apt-get -y install build-essential ed pkg-config apt-utils libglu1-mesa-dev libnlopt-dev nano libgsl-dev libz-dev
+  && apt-get -y install build-essential libv8-dev ed pkg-config apt-utils libglu1-mesa-dev libnlopt-dev nano libgsl-dev libz-dev
 
 RUN mkdir -p $HOME/.R/ \ 
   && echo "CXX14FLAGS=-O3 -march=native -mtune=native -fPIC" >> $HOME/.R/Makevars \
